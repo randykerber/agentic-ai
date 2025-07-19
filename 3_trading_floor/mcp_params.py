@@ -31,3 +31,13 @@ def researcher_mcp_server_params(name: str):
         {"command": "npx", "args": ["-y", "@modelcontextprotocol/server-brave-search"], "env": brave_env},
         {"command": "npx", "args": ["-y", "mcp-memory-libsql"], "env": {"LIBSQL_URL": f"file:./memory/{name}.db"}}
     ]
+
+# SiloSlayer A-Team MCP servers: Drafts processing and information routing
+
+def siloslayer_mcp_server_params(name: str):
+    return [
+        {"command": "uv", "args": ["run", "drafts_server.py"]},
+        {"command": "uvx", "args": ["mcp-server-fetch"]},
+        {"command": "npx", "args": ["-y", "@modelcontextprotocol/server-brave-search"], "env": brave_env},
+        {"command": "npx", "args": ["-y", "mcp-memory-libsql"], "env": {"LIBSQL_URL": f"file:./memory/{name}.db"}}
+    ]
