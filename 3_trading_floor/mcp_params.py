@@ -41,3 +41,12 @@ def siloslayer_mcp_server_params(name: str):
         {"command": "npx", "args": ["-y", "@modelcontextprotocol/server-brave-search"], "env": brave_env},
         {"command": "npx", "args": ["-y", "mcp-memory-libsql"], "env": {"LIBSQL_URL": f"file:./memory/{name}.db"}}
     ]
+
+# Weather agent MCP servers: Weather data and human input for disambiguation
+
+def weather_agent_mcp_server_params():
+    return [
+        {"command": "npx", "args": ["-y", "@timlukahorstmann/mcp-weather"], "env": {"ACCUWEATHER_API_KEY": os.getenv("ACCUWEATHER_API_KEY")}},
+        {"command": "uv", "args": ["run", "human_input_server.py"]},
+        {"command": "uv", "args": ["run", "push_server.py"]}
+    ]
